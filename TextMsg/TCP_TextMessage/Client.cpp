@@ -2,6 +2,10 @@
 
 Client::Client(QObject* parent) : QObject{parent}{
 
+  connect(&m_client, SIGNAL(connected()), this, SLOT(onConnected()));
+  connect(&m_client, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+  connect(&m_client, SIGNAL(bytesWritten(qint64)), this, SLOT(onBytesWritten(qint64)));
+  connect(&m_client, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
 }
 
 void Client::connectTo(QString ip, qint64 port){
