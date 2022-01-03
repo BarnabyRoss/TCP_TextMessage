@@ -2,6 +2,7 @@
 #define __CLIENT_H__
 
 #include <QObject>
+#include <QTcpSocket>
 
 class Client : public QObject{
 
@@ -9,7 +10,19 @@ class Client : public QObject{
 public:
   explicit Client(QObject *parent = nullptr);
 
-signals:
+  void connectTo();
+  qint64 send(const char* data, int len);
+  qint64 available();
+  void close();
+
+protected slots:
+  void onConnected();
+  void onReadyRead();
+  void onBytesWritten(qint64 bytes);
+  void onDisconnected();
+
+private:
+  QTcpSocket m_client;
 
 };
 
