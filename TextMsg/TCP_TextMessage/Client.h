@@ -10,7 +10,7 @@ class Client : public QObject{
 public:
   explicit Client(QObject *parent = nullptr);
 
-  void connectTo();
+  void connectTo(QString ip, qint64 port);
   qint64 send(const char* data, int len);
   qint64 available();
   void close();
